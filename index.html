@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thierry Dydewalle — Chef de Projet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --rust: #8b3a2f;
+    --slate: #3d4a56;
+    --mist: #e8ecef;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  nav a {
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none;
+    margin-left: 2.4rem;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 36px; height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900; line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span { color: var(--gold); display: block; }
+
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.7;
+    color: var(--slate);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .tag {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--slate);
+    border-radius: 2px;
+    background: rgba(201,168,76,0.07);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.4rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--gold); border-color: var(--gold); color: var(--ink);
+  }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .initials-badge {
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--slate) 0%, var(--ink) 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  }
+
+  .initials-badge::before {
+    content: '';
+    position: absolute;
+    inset: -12px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+  }
+
+  .initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .role-badge {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(245,240,232,0.6);
+    margin-top: 0.5rem;
+  }
+
+  .stats-strip {
+    position: absolute; bottom: -3rem; right: 0;
+    display: flex; gap: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+    background: var(--white);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border-top: 3px solid var(--gold);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--ink);
+  }
+
+  .stat-lbl {
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--slate);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 5rem; }
+
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; color: var(--ink);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* ── PROJECTS ── */
+  .projects { background: var(--ink); }
+
+  .projects .section-label { color: var(--gold); }
+  .projects h2 { color: var(--cream); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2.2rem;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleY(1); }
+
+  .project-org {
+    font-size: 0.68rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--cream); margin-bottom: 0.8rem;
+  }
+
+  .project-desc {
+    font-size: 0.88rem; line-height: 1.65;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1.2rem;
+  }
+
+  .project-pills {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .pill {
+    font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: rgba(201,168,76,0.8);
+    border-radius: 2px;
+  }
+
+  /* ── EXPERTISE ── */
+  .expertise { background: var(--mist); }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .expertise-card {
+    background: var(--white);
+    padding: 2rem;
+    border-bottom: 3px solid var(--gold);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .expertise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  }
+
+  .expertise-icon {
+    font-size: 2rem; margin-bottom: 1rem;
+  }
+
+  .expertise-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.6rem;
+  }
+
+  .expertise-desc {
+    font-size: 0.85rem; line-height: 1.6;
+    color: var(--slate);
+  }
+
+  /* ── CAREER TIMELINE ── */
+  .timeline { background: var(--cream); }
+
+  .timeline-list { max-width: 760px; }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 139px; top: 28px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-date {
+    font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 500; padding-top: 0.4rem;
+    text-align: right;
+  }
+
+  .timeline-content { padding-left: 1.5rem; border-left: 3px solid var(--gold); }
+
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.25rem;
+  }
+
+  .timeline-org {
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.87rem; line-height: 1.65;
+    color: var(--slate);
+  }
+
+  /* ── SKILLS ── */
+  .skills-section { background: var(--white); }
+
+  .skills-columns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  }
+
+  .skill-group-title {
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.4rem; font-weight: 500;
+  }
+
+  .skill-bar-row {
+    margin-bottom: 1.1rem;
+  }
+
+  .skill-bar-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-name { font-size: 0.83rem; color: var(--ink); font-weight: 500; }
+  .skill-level { font-size: 0.75rem; color: var(--gold); }
+
+  .bar-bg {
+    height: 4px; background: var(--mist); border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--gold), var(--rust));
+    border-radius: 2px;
+    animation: fillBar 1.4s ease-out forwards;
+    transform-origin: left;
+  }
+
+  @keyframes fillBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  .lang-chips { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+  .lang-chip {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--gold);
+    font-size: 0.8rem; color: var(--slate);
+    letter-spacing: 0.06em;
+  }
+
+  .cert-list { list-style: none; }
+  .cert-list li {
+    font-size: 0.85rem; color: var(--slate);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--mist);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .cert-list li::before { content: '◆'; color: var(--gold); font-size: 0.5rem; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--slate);
+    text-align: center; padding: 6rem 2rem;
+  }
+
+  .contact-section h2 { color: var(--cream); margin-bottom: 1rem; }
+  .contact-section p { color: rgba(245,240,232,0.65); margin-bottom: 2.5rem; font-size: 1.05rem; }
+
+  .contact-row {
+    display: flex; justify-content: center;
+    gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .contact-btn.primary {
+    background: var(--gold); color: var(--ink);
+    border: 2px solid var(--gold);
+  }
+
+  .contact-btn.primary:hover {
+    background: transparent; color: var(--gold);
+  }
+
+  .contact-btn.secondary {
+    border: 2px solid rgba(245,240,232,0.35);
+    color: var(--cream);
+  }
+
+  .contact-btn.secondary:hover {
+    border-color: var(--gold); color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 2rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  footer p { font-size: 0.78rem; color: rgba(245,240,232,0.35); letter-spacing: 0.05em; }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+
+  @media (max-width: 900px) {
+    header { padding: 1rem 1.5rem; }
+    nav { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 8rem; }
+    .hero-visual { display: none; }
+    section { padding: 4rem 2rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .skills-columns { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .timeline-item::after { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">Thierry Dydewalle</a>
+  <nav>
+    <a href="#projets">Projets</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow fade-in">Chef de Projet & Business Developer</div>
+    <h1 class="fade-in delay-1">Thierry<span>Dydewalle</span></h1>
+    <p class="hero-desc fade-in delay-2">
+      Trilingue FR · NL · EN — 15 ans d'expérience dans la gestion de projets publics et privés, le développement commercial et la coordination multi-acteurs. Certifié PRINCE2.
+    </p>
+    <div class="hero-tags fade-in delay-3">
+      <span class="tag">Gestion de Projet</span>
+      <span class="tag">Business Development</span>
+      <span class="tag">PRINCE2</span>
+      <span class="tag">Transformation Digitale</span>
+      <span class="tag">Secteur Public</span>
+    </div>
+    <a href="#projets" class="btn-primary fade-in delay-4">Voir mes réalisations</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="initials-badge">
+      <div class="initials">TD</div>
+      <div class="role-badge">Project Manager</div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-lbl">Années</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-lbl">Employeurs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-lbl">Langues</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="projects" id="projets">
+  <div class="section-label">Réalisations</div>
+  <h2>Projets & Missions clés</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-org">SPF Mobilité et Transports · 2022–présent</div>
+      <div class="project-title">BelDrive — Permis de conduire digital européen</div>
+      <div class="project-desc">
+        Pilotage de l'implémentation du permis de conduire numérique en Belgique, dans le cadre d'un projet européen interopérable. Coordination avec les parties prenantes institutionnelles, les fournisseurs IT et les autorités européennes.
+      </div>
+      <div class="project-pills">
+        <span class="pill">Pilotage IT</span>
+        <span class="pill">Coordination inter-services</span>
+        <span class="pill">Réglementation UE</span>
+        <span class="pill">PRINCE2</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-org">Défense Belge</div>
+      <div class="project-title">Gestion de projets institutionnels</div>
+      <div class="project-desc">
+        Coordination de projets complexes en environnement militaire et administratif. Gestion des parties prenantes multiples, suivi budgétaire et reporting institutionnel dans un contexte hautement structuré.
+      </div>
+      <div class="project-pills">
+        <span class="pill">Secteur public</span>
+        <span class="pill">Reporting</span>
+        <span class="pill">Gestion des risques</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-org">Belga News Agency</div>
+      <div class="project-title">Développement commercial & partenariats médias</div>
+      <div class="project-desc">
+        Développement du portefeuille clients, négociation de contrats et mise en place de partenariats stratégiques avec des acteurs clés des médias belges. Utilisation de Salesforce pour le CRM et le suivi des opportunités.
+      </div>
+      <div class="project-pills">
+        <span class="pill">Business Dev</span>
+        <span class="pill">Salesforce</span>
+        <span class="pill">Négociation</span>
+        <span class="pill">Médias</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-org">Mobistar (Orange Belgium)</div>
+      <div class="project-title">Sales & Account Management Télécom</div>
+      <div class="project-desc">
+        Gestion de comptes entreprises et développement de solutions télécom B2B. Animation d'un portefeuille clients, pilotage des cycles de vente et coordination interne avec les équipes techniques.
+      </div>
+      <div class="project-pills">
+        <span class="pill">B2B Sales</span>
+        <span class="pill">Account Management</span>
+        <span class="pill">Télécom</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-org">Corbis</div>
+      <div class="project-title">Développement de marché — Agence photographique</div>
+      <div class="project-desc">
+        Développement des ventes sur le marché belge pour une agence d'images mondiale. Prospection, closing et fidélisation clients dans le secteur créatif et de la communication.
+      </div>
+      <div class="project-pills">
+        <span class="pill">Sales B2B</span>
+        <span class="pill">Secteur créatif</span>
+        <span class="pill">Marché belge</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-org">Consultant Freelance</div>
+      <div class="project-title">Missions de conseil & gestion de projet</div>
+      <div class="project-desc">
+        Accompagnement d'entreprises et d'institutions dans leurs projets de transformation digitale, leurs stratégies commerciales et la mise en place de processus de gestion de projet structurés.
+      </div>
+      <div class="project-pills">
+        <span class="pill">Conseil</span>
+        <span class="pill">Transformation digitale</span>
+        <span class="pill">PME</span>
+        <span class="pill">Odoo · HubSpot</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="section-label">Savoir-faire</div>
+  <h2>Domaines d'expertise</h2>
+
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="expertise-icon">🗂️</div>
+      <div class="expertise-title">Gestion de Projet</div>
+      <div class="expertise-desc">Pilotage de projets publics et privés selon les standards PRINCE2. Planification, suivi des jalons, gestion des risques et coordination multi-acteurs dans des environnements complexes.</div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">📈</div>
+      <div class="expertise-title">Business Development</div>
+      <div class="expertise-desc">Développement commercial B2B, vente consultative, négociation de contrats et animation de partenariats stratégiques. Expérience dans les médias, la télécom et le secteur public.</div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🌐</div>
+      <div class="expertise-title">Transformation Digitale</div>
+      <div class="expertise-desc">Accompagnement de la transition numérique des organisations, déploiement d'outils CRM et d'applications digitales, avec une approche éco-responsable et centrée usager.</div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🤝</div>
+      <div class="expertise-title">Coordination Multi-acteurs</div>
+      <div class="expertise-desc">Animation de réseaux de partenaires, coordination d'équipes internes/externes et gestion des interfaces entre administrations, fournisseurs et décideurs.</div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🔍</div>
+      <div class="expertise-title">Analyse & Reporting</div>
+      <div class="expertise-desc">Production de rapports de suivi, tableaux de bord et analyses de données pour appuyer la prise de décision. Maîtrise de MS Office avancé, Salesforce et Odoo.</div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🌱</div>
+      <div class="expertise-title">Développement Durable</div>
+      <div class="expertise-desc">Formation en gestion environnementale (HEC Liège). Sensibilité aux dynamiques éco-responsables dans la conception et le déploiement des projets publics.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section class="timeline" id="parcours">
+  <div class="section-label">Parcours</div>
+  <h2>Expériences professionnelles</h2>
+
+  <div class="timeline-list">
+
+    <div class="timeline-item">
+      <div class="timeline-date">2022 – présent</div>
+      <div class="timeline-content">
+        <div class="timeline-role">Chef de Projet — BelDrive</div>
+        <div class="timeline-org">SPF Mobilité et Transports · Bruxelles</div>
+        <div class="timeline-desc">Pilotage de l'application belge du permis de conduire digital européen. Coordination institutionnelle, suivi des développements IT et représentation auprès des autorités européennes.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Freelance</div>
+      <div class="timeline-content">
+        <div class="timeline-role">Consultant en Gestion de Projet & Développement</div>
+        <div class="timeline-org">Indépendant · Belgique</div>
+        <div class="timeline-desc">Missions d'accompagnement auprès de PME et d'institutions dans leurs projets de transformation, leur stratégie commerciale et la structuration de leurs processus.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Antérieur</div>
+      <div class="timeline-content">
+        <div class="timeline-role">Sales & Project Manager</div>
+        <div class="timeline-org">Belga News Agency · Défense Belge · Corbis · Mobistar</div>
+        <div class="timeline-desc">Progression de carrière à travers des environnements très différents — médias, télécommunications, secteur public — avec une constante : le développement de relations clients, la gestion de projets et l'atteinte d'objectifs commerciaux.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Formation</div>
+      <div class="timeline-content">
+        <div class="timeline-role">Master en Gestion Environnementale</div>
+        <div class="timeline-org">HEC Liège · + Bachelier Marketing, EPHEC</div>
+        <div class="timeline-desc">Double formation alliant gestion stratégique et sensibilité environnementale, complétée par une certification PRINCE2 et plusieurs formations continues en digital, communication et export.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section class="skills-section" id="competences">
+  <div class="section-label">Compétences</div>
+  <h2>Outils & aptitudes</h2>
+
+  <div class="skills-columns">
+    <div>
+      <div class="skill-group-title">Compétences techniques</div>
+
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">MS Office (Excel, PowerPoint, Word)</span><span class="skill-level">Expert</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">Salesforce CRM</span><span class="skill-level">Avancé</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">Odoo / HubSpot</span><span class="skill-level">Intermédiaire</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">Photoshop / InDesign</span><span class="skill-level">Intermédiaire</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">Mailchimp / Marketing Digital</span><span class="skill-level">Intermédiaire</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:68%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-header"><span class="skill-name">SAP</span><span class="skill-level">Débutant</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+      </div>
+
+      <br>
+      <div class="skill-group-title">Langues</div>
+      <div class="lang-chips">
+        <span class="lang-chip">🇫🇷 Français — Natif</span>
+        <span class="lang-chip">🇳🇱 Néerlandais — Courant</span>
+        <span class="lang-chip">🇬🇧 Anglais — Courant</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-group-title">Certifications & Formations</div>
+      <ul class="cert-list">
+        <li>PRINCE2 Foundation & Practitioner</li>
+        <li>PRINCE2 Agile Practitioner (en cours)</li>
+        <li>Formation Digital Marketing</li>
+        <li>Formation Communication interculturelle</li>
+        <li>Formation Gestion Export</li>
+        <li>Master Gestion Environnementale — HEC Liège</li>
+        <li>Bachelier Marketing — EPHEC Bruxelles</li>
+      </ul>
+
+      <br>
+      <div class="skill-group-title">Intérêts & Passions</div>
+      <ul class="cert-list">
+        <li>Innovation & technologies digitales</li>
+        <li>Voyages en Asie & Amérique Latine</li>
+        <li>Yoga & Méditation</li>
+        <li>Improvisation théâtrale</li>
+        <li>Bourse & finance personnelle</li>
+        <li>Burning Man & créativité collaborative</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label" style="justify-content:center; color:var(--gold-light);">Contact</div>
+  <h2>Travaillons ensemble</h2>
+  <p>Ouvert aux opportunités en gestion de projet, développement commercial<br>et conseil en transformation digitale.</p>
+  <div class="contact-row">
+    <a href="mailto:thierry.dydewalle@gmail.com" class="contact-btn primary">M'envoyer un email</a>
+    <a href="https://www.linkedin.com/in/thierry-dydewalle" target="_blank" class="contact-btn secondary">LinkedIn</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Thierry Dydewalle</p>
+  <p>Bruxelles, Belgique · FR · NL · EN</p>
+</footer>
+
+</body>
+</html>
